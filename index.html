@@ -1,832 +1,699 @@
-<!--
-✅ ONE-FILE GITHUB PAGES WEBSITE (COPY/PASTE READY)
---------------------------------------------------
-1) Create a GitHub repo
-2) Add ONE file named: index.html
-3) Paste EVERYTHING from this file into index.html
-4) Repo Settings → Pages → Deploy from branch → main → /(root)
-5) Open your GitHub Pages link.
-
-📸 OPTIONAL (recommended):
-Create a folder called /assets and add images like:
-assets/hero.jpg
-assets/week01.jpg ... assets/week13.jpg
-assets/rig_full.jpg
-assets/rig_mini.jpg
-
-This site auto-handles missing images (shows clean placeholders).
--->
-
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b0f14" />
-  <meta name="description" content="VR Racing Motion Rig — Semester Portfolio (GitHub Pages)" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VR Racing Motion Rig — Semester Portfolio</title>
-
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <meta name="description" content="A sleek GitHub Pages portfolio documenting a VR racing motion rig project across Weeks 1–13 with a clean timeline, proof, and next steps." />
 
   <style>
     :root{
-      --bg0:#05070b;
-      --bg1:#070a10;
-      --bg2:#0b0f16;
-      --card:#0d121a;
-      --card2:#0f1722;
-      --text:#e9effa;
-      --muted:#a4b3c9;
-      --soft:#1a2636;
-      --line:rgba(255,255,255,.08);
-      --line2:rgba(255,255,255,.06);
-      --shadow: 0 30px 90px rgba(0,0,0,.55);
-      --shadow2: 0 16px 50px rgba(0,0,0,.38);
-
-      --accent:#86a8ff;
-      --accent2:#b08cff;
-      --accent3:#61f2c2;
-      --warn:#ffcc66;
-
-      --mono:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      --sans:"Manrope", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-
-      --r14:14px;
-      --r18:18px;
-      --r22:22px;
-
-      --max: 1180px;
+      --bg: #0b0d10;
+      --panel: rgba(255,255,255,.04);
+      --panel2: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.10);
+      --stroke2: rgba(255,255,255,.14);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --faint: rgba(255,255,255,.55);
+      --shadow: 0 22px 70px rgba(0,0,0,.55);
+      --shadow2: 0 10px 30px rgba(0,0,0,.45);
+      --radius: 18px;
+      --radius2: 26px;
+      --max: 1100px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    html{ scroll-behavior:smooth; }
     body{
       margin:0;
-      font-family:var(--sans);
-      color:var(--text);
-      background: radial-gradient(1200px 800px at 10% 0%, rgba(134,168,255,.12), transparent 40%),
-                  radial-gradient(900px 700px at 85% 20%, rgba(176,140,255,.10), transparent 40%),
-                  radial-gradient(1200px 800px at 60% 95%, rgba(97,242,194,.07), transparent 45%),
-                  linear-gradient(180deg, var(--bg0), var(--bg2));
+      font-family: var(--sans);
+      color: var(--text);
+      background: radial-gradient(1200px 900px at 20% -10%, rgba(255,255,255,.08), transparent 55%),
+                  radial-gradient(1000px 800px at 85% 0%, rgba(255,255,255,.06), transparent 50%),
+                  radial-gradient(1100px 900px at 50% 100%, rgba(255,255,255,.05), transparent 55%),
+                  var(--bg);
       overflow-x:hidden;
     }
 
     a{ color:inherit; text-decoration:none; }
-    img{ display:block; max-width:100%; border-radius:var(--r18); }
-    .mono{ font-family:var(--mono); }
-    .muted{ color:var(--muted); }
-    .wrap{ width:min(var(--max), 92vw); margin:0 auto; padding:92px 0 64px; }
+    a:hover{ text-decoration:underline; }
 
-    /* ========= Ambient layers ========= */
-    .bg{
-      position:fixed; inset:0;
-      pointer-events:none; z-index:-1;
-    }
-    .bg::before{
-      content:"";
-      position:absolute; inset:-40%;
-      background:
-        radial-gradient(circle at 20% 10%, rgba(134,168,255,.10), transparent 45%),
-        radial-gradient(circle at 70% 30%, rgba(176,140,255,.08), transparent 40%),
-        radial-gradient(circle at 40% 85%, rgba(97,242,194,.06), transparent 45%);
-      filter: blur(0px);
-      opacity:.9;
-    }
-    .noise{
-      position:absolute; inset:0;
-      opacity:.07;
+    /* Subtle, not “weird”: very light grain */
+    .grain{
+      position: fixed;
+      inset: 0;
+      pointer-events:none;
+      opacity:.03;
       mix-blend-mode: overlay;
       background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+      z-index:0;
     }
 
-    /* ========= Scroll progress ========= */
-    .progress{
-      position:fixed; top:0; left:0; right:0; height:4px;
-      background: rgba(255,255,255,.05);
-      z-index:60;
-    }
-    .progress > div{
-      height:100%;
-      width:0%;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 18px rgba(134,168,255,.35);
+    .wrap{ position:relative; z-index:1; }
+    .container{
+      width:min(var(--max), calc(100% - 48px));
+      margin:0 auto;
     }
 
-    /* ========= Top nav ========= */
+    /* Top nav */
     .nav{
-      position:fixed;
-      top:12px; left:50%;
-      transform:translateX(-50%);
-      width:min(var(--max), 92vw);
-      display:flex; align-items:center; justify-content:space-between;
-      padding:10px 12px;
-      background: rgba(10,14,20,.68);
-      backdrop-filter: blur(16px);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius:var(--r18);
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
-      z-index:55;
+      position: sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter: blur(14px);
+      background: rgba(11,13,16,.55);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 14px 0;
+      gap: 16px;
     }
     .brand{
-      display:flex; align-items:center; gap:10px;
-      padding:8px 10px;
-      border-radius:var(--r14);
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: .2px;
+      user-select:none;
+      white-space:nowrap;
     }
-    .brand:hover{ background: rgba(255,255,255,.04); }
     .dot{
-      width:10px; height:10px; border-radius:50%;
-      background: linear-gradient(180deg, var(--accent), var(--accent2));
-      box-shadow: 0 0 18px rgba(134,168,255,.45);
+      width:12px; height:12px; border-radius:999px;
+      background: rgba(255,255,255,.85);
+      box-shadow: 0 0 0 6px rgba(255,255,255,.07);
     }
-    .brand b{ font-weight:900; letter-spacing:.2px; }
-    .badge{
-      margin-left:8px;
-      font-size:12px; color:var(--muted);
-      border:1px solid rgba(255,255,255,.10);
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.03);
+    .nav-links{
+      display:flex;
+      gap: 14px;
+      align-items:center;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.86);
+      font-size: 13px;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      text-decoration:none !important;
+    }
+    .pill:hover{
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.14);
+      transform: translateY(-1px);
     }
 
-    .navlinks{ display:flex; gap:6px; align-items:center; }
-    .navlinks a{
-      font-size:13px;
-      color:var(--muted);
-      padding:8px 10px;
-      border-radius:12px;
-      border:1px solid transparent;
-    }
-    .navlinks a:hover{ background: rgba(255,255,255,.04); color:var(--text); }
-    .navlinks a.active{
-      color:var(--text);
-      border-color: rgba(134,168,255,.25);
-      background: rgba(134,168,255,.08);
-    }
-
-    .burger{
+    .menu-btn{
       display:none;
-      width:42px; height:42px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.88);
+      border-radius: 12px;
+      padding: 10px 12px;
       cursor:pointer;
     }
-    .burger span{
-      display:block; width:18px; height:2px;
-      margin:4px auto;
-      background: rgba(232,239,250,.9);
-      border-radius:99px;
+
+    @media (max-width: 860px){
+      .nav-links{ display:none; }
+      .menu-btn{ display:inline-flex; align-items:center; gap:10px; }
+      .mobile{
+        display:none;
+        padding: 0 0 14px 0;
+      }
+      .mobile.open{ display:block; }
+      .mobile .nav-links{
+        display:flex;
+        justify-content:flex-start;
+        gap: 10px;
+        padding-bottom: 6px;
+      }
     }
 
-    /* ========= Drawer ========= */
-    .drawer{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.60);
-      display:none;
-      z-index:80;
-    }
-    .drawer.open{ display:block; }
-    .panel{
-      position:absolute; right:12px; top:12px;
-      width:min(380px, 92vw);
-      border-radius:var(--r18);
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(10,14,20,.92);
-      box-shadow: var(--shadow);
-      padding:14px;
-    }
-    .paneltop{
-      display:flex; align-items:center; justify-content:space-between;
-      margin-bottom:8px;
-    }
-    .paneltop b{ font-weight:900; }
-    .close{
-      border:none; background:transparent; color:var(--text);
-      font-size:18px; cursor:pointer;
-      padding:8px 10px; border-radius:12px;
-    }
-    .close:hover{ background: rgba(255,255,255,.06); }
-    .panel a{
-      display:block;
-      padding:12px 12px;
-      border-radius:14px;
-      color:var(--muted);
-      border:1px solid rgba(255,255,255,.08);
-      margin:10px 0;
-      background: rgba(255,255,255,.03);
-    }
-    .panel a:hover{ color:var(--text); background: rgba(255,255,255,.05); }
-
-    /* ========= Hero ========= */
+    /* Hero */
     .hero{
+      padding: 48px 0 26px 0;
+    }
+    .hero-grid{
       display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:18px;
-      align-items:start;
-      padding-top: 10px;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      align-items:stretch;
     }
-    .kicker{
-      display:flex; flex-wrap:wrap; align-items:center; gap:10px;
-      color:var(--muted);
-      margin:0 0 10px;
+    @media (max-width: 980px){
+      .hero-grid{ grid-template-columns: 1fr; }
     }
-    .chip{
-      font-size:12px;
-      color:var(--muted);
-      border:1px solid rgba(255,255,255,.10);
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.03);
-    }
-    .sep{ opacity:.5; }
-    .h1{
-      margin:10px 0 10px;
-      font-size: clamp(34px, 4vw, 56px);
-      line-height:1.05;
-      letter-spacing:-1px;
-      font-weight:900;
-    }
-    .glow{
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      text-shadow: 0 0 28px rgba(134,168,255,.18);
-    }
-    .lead{
-      margin:0 0 16px;
-      color:var(--muted);
-      line-height:1.65;
-      font-size: 16px;
-    }
-    .cta{ display:flex; gap:10px; flex-wrap:wrap; margin: 0 0 16px; }
-    .btn{
-      display:inline-flex; align-items:center; justify-content:center;
-      padding: 12px 14px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      font-weight:800;
-    }
-    .btn:hover{ background: rgba(255,255,255,.05); transform: translateY(-1px); }
-    .primary{
-      border-color: rgba(134,168,255,.25);
-      background: linear-gradient(180deg, rgba(134,168,255,.20), rgba(255,255,255,.03));
-    }
-    .ghost{ color:var(--muted); }
-
-    .stats{
-      display:grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap:10px;
-    }
-    .stat{
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(255,255,255,.02);
-      padding:12px;
-      box-shadow: 0 10px 30px rgba(0,0,0,.20);
-    }
-    .stat b{ display:block; font-weight:900; letter-spacing:-.4px; }
-    .stat span{ font-size:12px; color:var(--muted); }
-
-    .showcase{
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+    .card{
+      background: var(--panel);
+      border: 1px solid var(--stroke);
+      border-radius: var(--radius2);
       box-shadow: var(--shadow2);
       overflow:hidden;
     }
-    .showtop{
-      display:flex; justify-content:space-between; align-items:center;
-      padding:14px 16px;
-      border-bottom:1px solid rgba(255,255,255,.08);
+    .card.pad{ padding: 26px; }
+    .kicker{
+      color: var(--faint);
+      font-size: 13px;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
     }
-    .showtop b{ font-weight:900; }
-    .pill{
-      font-size:12px; color:var(--muted);
-      border:1px solid rgba(255,255,255,.10);
-      padding:6px 10px;
-      border-radius:999px;
-      background: rgba(255,255,255,.03);
+    h1{
+      margin: 0 0 12px 0;
+      font-size: 40px;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
     }
-    .cards2{
+    @media (max-width: 520px){
+      h1{ font-size: 34px; }
+    }
+    .lead{
+      margin:0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.55;
+      max-width: 62ch;
+    }
+    .cta{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 18px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding: 11px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.92);
+      font-size: 14px;
+      font-weight: 650;
+      transition: transform .12s ease, background .12s ease, border-color .12s ease;
+      text-decoration:none !important;
+    }
+    .btn:hover{
+      background: rgba(255,255,255,.07);
+      border-color: rgba(255,255,255,.16);
+      transform: translateY(-.5px);
+    }
+    .btn.primary{
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.18);
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .stat{
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .stat b{
+      display:block;
+      font-size: 22px;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .stat span{
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* Sections */
+    section{ padding: 26px 0; }
+    .section-title{
+      display:flex;
+      align-items:flex-end;
+      justify-content:space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+    }
+    .sub{
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+      margin: 6px 0 0 0;
+      max-width: 78ch;
+    }
+    .grid2{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap:10px;
-      padding:14px 14px 0;
+      gap: 14px;
+      align-items:start;
     }
-    .mini{
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.08);
-      background: rgba(8,12,18,.58);
-      padding:12px;
+    @media (max-width: 920px){
+      .grid2{ grid-template-columns:1fr; }
     }
-    .mini small{ color:var(--muted); }
-    .mini b{ display:block; margin-top:4px; font-weight:900; }
-    .mini p{ margin:6px 0 0; color:var(--muted); line-height:1.55; font-size:13px; }
 
-    .heroimg{
-      padding:14px;
+    .list{
+      margin: 10px 0 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+      line-height: 1.6;
+      font-size: 14px;
     }
-    .frame{
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.20);
-      padding:10px;
+    .tagrow{
+      display:flex;
+      flex-wrap:wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .tag{
+      font-size: 12px;
+      color: rgba(255,255,255,.82);
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+
+    /* Proof block */
+    .proof-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 920px){
+      .proof-grid{ grid-template-columns: 1fr; }
+    }
+    .media{
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.16);
+      padding: 12px;
+    }
+    .imgbox{
+      width:100%;
+      aspect-ratio: 16/9;
+      border-radius: 16px;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.03);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+    .imgbox img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
     }
     .placeholder{
-      border-radius:18px;
-      height: 240px;
-      background:
-        radial-gradient(800px 300px at 20% 10%, rgba(134,168,255,.20), transparent 50%),
-        radial-gradient(700px 300px at 80% 20%, rgba(176,140,255,.16), transparent 50%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
-      border:1px dashed rgba(255,255,255,.14);
-      display:flex; align-items:center; justify-content:center;
-      color: rgba(232,239,250,.75);
+      padding: 18px;
       text-align:center;
-      padding: 16px;
+      color: rgba(255,255,255,.68);
+      font-size: 13px;
+      line-height: 1.45;
     }
-
-    /* ========= Sections ========= */
-    section{ margin-top: 70px; }
-    .head h2{
-      margin:0 0 8px;
-      font-size: 30px;
-      letter-spacing:-.6px;
-      font-weight:900;
-    }
-    .head p{ margin:0; color:var(--muted); line-height:1.65; }
-
-    .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; margin-top: 16px; }
-    .grid3{ display:grid; grid-template-columns: repeat(3, 1fr); gap:14px; margin-top: 16px; }
-    .card{
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding:16px;
-      box-shadow: 0 10px 40px rgba(0,0,0,.22);
-    }
-    .card.glowy{
-      background:
-        radial-gradient(circle at 30% 10%, rgba(134,168,255,.11), transparent 55%),
-        radial-gradient(circle at 70% 15%, rgba(176,140,255,.10), transparent 55%),
-        rgba(255,255,255,.03);
-    }
-    .card h3{ margin:0 0 8px; font-weight:900; }
-    .card p{ margin:0; color:var(--muted); line-height:1.65; }
-    ul{ margin:0; padding-left:18px; color:var(--muted); line-height:1.75; }
-
-    .callout{
-      margin-top:12px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      padding:12px;
-      color:var(--muted);
-      line-height:1.6;
-    }
-    .callout strong{ color: rgba(232,239,250,.95); }
-    .callout.warn{ border-color: rgba(255,204,102,.22); background: rgba(255,204,102,.07); }
-    .callout.note{ border-color: rgba(134,168,255,.22); background: rgba(134,168,255,.07); }
-    .callout.good{ border-color: rgba(97,242,194,.22); background: rgba(97,242,194,.07); }
-
-    .links{ display:flex; gap:10px; flex-wrap:wrap; margin-top:12px; }
-    .link{
-      font-size:13px;
-      font-weight:800;
-      color: rgba(232,239,250,.92);
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.02);
-      padding:10px 12px;
-      border-radius:14px;
-    }
-    .link:hover{ background: rgba(255,255,255,.05); transform: translateY(-1px); }
-
-    details{
-      margin-top:12px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.20);
-      overflow:hidden;
-    }
-    details summary{
-      cursor:pointer;
-      padding:12px 12px;
-      font-weight:900;
-      color: rgba(232,239,250,.94);
-      list-style:none;
-    }
-    details summary::-webkit-details-marker{ display:none; }
-    pre{
-      margin:0;
-      padding:12px;
-      overflow:auto;
-      border-top:1px solid rgba(255,255,255,.08);
-      background: rgba(0,0,0,.15);
-    }
-    code{
+    .placeholder code{
       font-family: var(--mono);
-      font-size: 12.5px;
-      color: rgba(232,239,250,.92);
+      font-size: 12px;
+      color: rgba(255,255,255,.82);
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 10px;
+      padding: 3px 8px;
+      display:inline-block;
+      margin-top: 6px;
     }
 
-    /* ========= Timeline ========= */
-    .timeline{
-      position:relative;
-      margin-top: 22px;
-      padding-left: 14px;
+    pre{
+      margin: 12px 0 0 0;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.24);
+      overflow:auto;
+      color: rgba(255,255,255,.90);
+      font-family: var(--mono);
+      font-size: 12.6px;
+      line-height: 1.55;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.03);
     }
-    .timeline::before{
-      content:"";
+    .links{
+      display:flex;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
+    }
+
+    /* Timeline */
+    .timeline{
+      margin-top: 10px;
+      position:relative;
+    }
+    .rail{
       position:absolute;
       left: 18px;
-      top: 0;
-      bottom: 0;
-      width:2px;
-      background: linear-gradient(180deg, rgba(134,168,255,.40), rgba(176,140,255,.30), rgba(255,255,255,.08));
-      border-radius: 99px;
+      top: 6px;
+      bottom: 6px;
+      width: 2px;
+      background: rgba(255,255,255,.10);
+      border-radius: 999px;
     }
     .titem{
       position:relative;
-      display:grid;
-      grid-template-columns: 54px 1fr;
-      gap:12px;
-      margin: 0 0 16px;
+      padding-left: 56px;
+      margin: 14px 0;
     }
     .pin{
-      width:40px; height:40px;
-      border-radius:16px;
-      display:flex; align-items:center; justify-content:center;
-      font-weight:900;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.03);
-      box-shadow: 0 10px 25px rgba(0,0,0,.25);
-      margin-left:-2px;
+      position:absolute;
+      left: 8px;
+      top: 18px;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 0 0 7px rgba(255,255,255,.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color: #0b0d10;
+      font-weight: 800;
+      font-size: 12px;
     }
     .tcard{
-      border-radius:22px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      padding:14px;
-    }
-    .trow{
-      display:flex; align-items:center; justify-content:space-between;
-      gap:10px; flex-wrap:wrap;
-      margin-bottom:6px;
-    }
-    .trow b{ font-weight:900; letter-spacing:-.2px; }
-    .tag{
-      font-size:12px;
-      color:var(--muted);
-      padding:6px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-    }
-
-    .media{
-      margin-top:10px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.18);
-      padding:10px;
-    }
-    .zoom{
-      cursor: zoom-in;
-      transition: transform .15s ease, box-shadow .15s ease;
-    }
-    .zoom:hover{
-      transform: translateY(-2px);
-      box-shadow: 0 18px 45px rgba(0,0,0,.38);
-    }
-
-    /* Auto placeholder if image missing */
-    .imgwrap{ position:relative; }
-    .ph{
-      border-radius:18px;
-      height: 220px;
-      border:1px dashed rgba(255,255,255,.14);
-      background:
-        radial-gradient(800px 250px at 20% 10%, rgba(134,168,255,.18), transparent 55%),
-        radial-gradient(700px 250px at 80% 15%, rgba(176,140,255,.14), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
-      display:flex; align-items:center; justify-content:center;
-      text-align:center;
-      padding: 16px;
-      color: rgba(232,239,250,.72);
-    }
-    .imgwrap img{ display:block; }
-    .caption{
-      margin-top:8px;
-      color:var(--muted);
-      font-size:12px;
-      line-height:1.45;
-    }
-
-    /* ========= Footer ========= */
-    footer{
-      margin-top: 60px;
-      padding-top: 18px;
-      border-top:1px solid rgba(255,255,255,.08);
-      display:flex; justify-content:space-between; align-items:center; gap:12px;
-    }
-    footer b{ font-weight:900; }
-    footer small{ color:var(--muted); display:block; margin-top:6px; }
-
-    /* ========= Lightbox ========= */
-    .lightbox{
-      position:fixed; inset:0;
-      display:none;
-      align-items:center; justify-content:center;
-      background: rgba(0,0,0,.78);
-      z-index:120;
-      padding:18px;
-    }
-    .lightbox.open{ display:flex; }
-    .lightbox img{
-      width: min(1100px, 94vw);
-      max-height: 84vh;
-      object-fit: contain;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(10,14,20,.88);
-    }
-    .xbtn{
-      position:absolute; top:14px; right:14px;
-      width:44px; height:44px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
       background: rgba(255,255,255,.04);
-      color: rgba(232,239,250,.92);
-      font-size:18px;
-      cursor:pointer;
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      overflow:hidden;
+      box-shadow: var(--shadow2);
     }
-    .xbtn:hover{ background: rgba(255,255,255,.06); }
-    .hint{
-      position:absolute; bottom:14px;
-      color: rgba(232,239,250,.85);
-      font-size:13px;
-      opacity:.9;
+    .tpad{ padding: 16px 18px; }
+    .trow{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 10px;
+      flex-wrap:wrap;
+      margin-bottom: 6px;
+    }
+    .trow b{
+      font-size: 15px;
+      letter-spacing: -0.01em;
+    }
+    .phase{
+      font-size: 12px;
+      color: rgba(255,255,255,.78);
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .tpad p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+    .tmedia{
+      padding: 12px;
+      border-top: 1px solid rgba(255,255,255,.08);
+      background: rgba(0,0,0,.16);
+    }
+    .tmedia .imgbox{ aspect-ratio: 21/9; }
+
+    /* Footer */
+    footer{
+      padding: 38px 0 46px;
+      color: rgba(255,255,255,.60);
+      font-size: 13px;
+    }
+    .hr{
+      height: 1px;
+      background: rgba(255,255,255,.08);
+      margin: 14px 0;
     }
 
-    /* ========= Responsive ========= */
-    @media (max-width: 980px){
-      .hero{ grid-template-columns: 1fr; }
-      .stats{ grid-template-columns: 1fr 1fr; }
-      .grid2{ grid-template-columns: 1fr; }
-      .grid3{ grid-template-columns: 1fr; }
-      .navlinks{ display:none; }
-      .burger{ display:block; }
+    /* Small helper */
+    .small{
+      font-size: 12.5px;
+      color: rgba(255,255,255,.68);
+      line-height: 1.55;
+    }
+    .callout{
+      padding: 14px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.80);
+      font-size: 13.5px;
+      line-height: 1.55;
+      margin-top: 12px;
     }
   </style>
 </head>
 
 <body>
-  <div class="bg" aria-hidden="true"><div class="noise"></div></div>
+  <div class="grain"></div>
 
-  <div class="progress" aria-hidden="true"><div id="bar"></div></div>
+  <div class="wrap">
+    <!-- NAV -->
+    <div class="nav">
+      <div class="container">
+        <div class="nav-inner">
+          <div class="brand">
+            <span class="dot"></span>
+            <span>VR Racing Motion Rig — Semester Portfolio</span>
+          </div>
 
-  <header class="nav">
-    <a class="brand" href="#top" aria-label="Go to top">
-      <span class="dot"></span>
-      <b>VR Racing Motion Rig</b>
-      <span class="badge">Semester Portfolio</span>
-    </a>
+          <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobileNav">
+            ☰ Menu
+          </button>
 
-    <nav class="navlinks" aria-label="Sections">
-      <a href="#mission" data-spy="mission">Mission</a>
-      <a href="#what" data-spy="what">Build</a>
-      <a href="#proof" data-spy="proof">Proof</a>
-      <a href="#timeline" data-spy="timeline">Timeline</a>
-      <a href="#next" data-spy="next">Next</a>
-      <a href="#help" data-spy="help">Help</a>
-    </nav>
+          <div class="nav-links" aria-label="Primary navigation">
+            <a class="pill" href="#mission">Mission</a>
+            <a class="pill" href="#build">Build</a>
+            <a class="pill" href="#proof">Proof</a>
+            <a class="pill" href="#timeline">Timeline</a>
+            <a class="pill" href="#next">Next</a>
+            <a class="pill" href="#help">Help</a>
+          </div>
+        </div>
 
-    <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </header>
-
-  <aside class="drawer" id="drawer" aria-hidden="true">
-    <div class="panel">
-      <div class="paneltop">
-        <b>Navigate</b>
-        <button class="close" id="close" aria-label="Close menu">✕</button>
+        <div class="mobile" id="mobileNav">
+          <div class="nav-links">
+            <a class="pill" href="#mission">Mission</a>
+            <a class="pill" href="#build">Build</a>
+            <a class="pill" href="#proof">Proof</a>
+            <a class="pill" href="#timeline">Timeline</a>
+            <a class="pill" href="#next">Next</a>
+            <a class="pill" href="#help">Help</a>
+          </div>
+        </div>
       </div>
-      <a href="#mission">Mission</a>
-      <a href="#what">Build</a>
-      <a href="#proof">Proof</a>
-      <a href="#timeline">Timeline</a>
-      <a href="#next">Next Steps</a>
-      <a href="#help">Help Needed</a>
     </div>
-  </aside>
 
-  <main id="top" class="wrap">
     <!-- HERO -->
-    <section class="hero">
-      <div>
-        <div class="kicker">
-          <span class="chip">Hardware × VR × Control Systems</span>
-          <span class="sep">•</span>
-          <span class="muted">Weeks 1–13 documented</span>
-        </div>
+    <header class="hero">
+      <div class="container">
+        <div class="hero-grid">
+          <div class="card pad">
+            <div class="kicker">Hardware × Control Systems × VR goal • Weeks 1–13</div>
+            <h1>A VR racing simulator that moves with you.</h1>
+            <p class="lead">
+              This site documents a semester project built in two phases:
+              <b>Weeks 1–9</b> focused on full-scale motion rig research and architecture,
+              then <b>Weeks 10–13</b> pivoted to a mini prototype to prove the hardest requirement first:
+              <b>real-time hardware response to commands</b>.
+            </p>
 
-        <div class="h1">
-          A VR racing simulator that <span class="glow">moves with you</span>.
-        </div>
+            <div class="cta">
+              <a class="btn primary" href="#timeline">Explore Timeline</a>
+              <a class="btn" href="#proof">See Proof</a>
+              <a class="btn" href="#help">Help I Need</a>
+            </div>
 
-        <p class="lead">
-          This portfolio documents a semester project built in two phases:
-          <br><b>Weeks 1–9:</b> full-scale motion rig concept (seat motion + VR integration plan).
-          <br><b>Weeks 10–13:</b> a mini prototype pivot to prove responsive control and finish a working build.
-        </p>
+            <div class="callout">
+              <b>Engineering honesty:</b> the pivot wasn’t “giving up.” It was de-risking.
+              We stopped chasing the biggest build and proved the core control loop under real constraints.
+            </div>
 
-        <div class="cta">
-          <a class="btn primary" href="#timeline">Explore Timeline</a>
-          <a class="btn ghost" href="#proof">See Proof</a>
-          <a class="btn ghost" href="#help">Help I Need</a>
-        </div>
-
-        <div class="stats">
-          <div class="stat"><b>2</b><span>phases</span></div>
-          <div class="stat"><b>13</b><span>weeks logged</span></div>
-          <div class="stat"><b>Arduino</b><span>control platform</span></div>
-          <div class="stat"><b>VR</b><span>integration goal</span></div>
-        </div>
-
-        <div class="callout note">
-          <strong>What makes this real engineering:</strong> the pivot wasn’t “giving up.” It was de-risking.
-          We stopped chasing the biggest build and proved the hardest requirement first: <b>real-time hardware response to commands</b>.
-        </div>
-      </div>
-
-      <div class="showcase">
-        <div class="showtop">
-          <b>Project Snapshot</b>
-          <span class="pill">Black / Gray Sleek Theme</span>
-        </div>
-
-        <div class="cards2">
-          <div class="mini">
-            <small>Phase 1</small>
-            <b>Full Rig Concept</b>
-            <p>Seat motion plan + actuator research + architecture for VR integration.</p>
+            <div class="tagrow">
+              <span class="tag">Pivot-driven development</span>
+              <span class="tag">Arduino control</span>
+              <span class="tag">Serial command loop</span>
+              <span class="tag">Documentation-first</span>
+            </div>
           </div>
-          <div class="mini">
-            <small>Phase 2</small>
-            <b>Mini Prototype</b>
-            <p>Servo/motor-based steering motion on command; debugged to stable behavior.</p>
-          </div>
-          <div class="mini">
-            <small>Core loop</small>
-            <b>PC → Arduino → Motion</b>
-            <p>Command flow designed for real-time input mapping and future wheel integration.</p>
-          </div>
-          <div class="mini">
-            <small>Deliverables</small>
-            <b>Proof-first docs</b>
-            <p>Timeline + photos + wiring steps + code snippets + links.</p>
-          </div>
-        </div>
 
-        <div class="heroimg">
-          <div class="frame">
-            <!-- Optional hero image -->
-            <div class="imgwrap">
-              <img class="zoom" src="assets/hero.jpg" alt="Hero image (optional) — add assets/hero.jpg" loading="lazy"
-                   onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-              <div class="ph" style="display:none;">
-                <div>
-                  <b>Optional hero image</b><br>
-                  Add <span class="mono">assets/hero.jpg</span><br>
-                  (photo of rig / prototype / lab bench)
+          <div class="card">
+            <div class="media">
+              <div class="imgbox" id="heroBox">
+                <div class="placeholder" id="heroPlaceholder">
+                  Optional hero image (recommended)<br/>
+                  Add a clean photo of your final build or mini prototype.
+                  <br/><code>assets/hero.jpg</code>
+                </div>
+                <img id="heroImg" alt="Hero image" style="display:none;" />
+              </div>
+              <div class="hr"></div>
+
+              <div class="stats">
+                <div class="stat">
+                  <b>2</b>
+                  <span>phases documented</span>
+                </div>
+                <div class="stat">
+                  <b>13</b>
+                  <span>weeks logged</span>
+                </div>
+                <div class="stat">
+                  <b>Arduino</b>
+                  <span>control platform</span>
+                </div>
+                <div class="stat">
+                  <b>Wheel → Motion</b>
+                  <span>next integration step</span>
                 </div>
               </div>
-            </div>
-            <div class="caption">
-              Tip: add a clean photo or screenshot named <span class="mono">assets/hero.jpg</span>.
-              This design is built to look premium even with basic pictures.
+
+              <div class="hr"></div>
+              <div class="small">
+                Tip: The site stays premium even with basic phone photos—just keep lighting clean and crop tight.
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </header>
 
     <!-- MISSION -->
     <section id="mission">
-      <div class="head">
-        <h2>What I’m trying to make / solve</h2>
-        <p>
-          Most VR driving demos look cool but feel fake: the visuals move, but the body doesn’t.
-          My goal is to build a VR racing simulator that adds physical cues (motion and steering feedback)
-          so the driving experience feels more realistic and immersive.
-        </p>
-      </div>
-
-      <div class="grid2">
-        <div class="card">
-          <h3>Project goal</h3>
-          <ul>
-            <li><b>Immersion:</b> connect hardware motion cues to driving actions.</li>
-            <li><b>Responsiveness:</b> motion reacts in real time (low latency, repeatable).</li>
-            <li><b>Buildability:</b> prototype under school/time constraints while documenting everything.</li>
-          </ul>
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>What I’m trying to make / solve</h2>
+            <p class="sub">
+              Most VR driving demos look cool but feel fake: the visuals move, but your body doesn’t.
+              The goal is to add physical cues (motion + steering feedback) so the driving experience feels more real.
+            </p>
+          </div>
         </div>
 
-        <div class="card">
-          <h3>Success criteria</h3>
-          <ul>
-            <li>Working prototype that proves motion/steering response to commands.</li>
-            <li>Clear documentation: wiring, code, timeline, testing notes, blockers.</li>
-            <li>Obvious “next steps” that make the full-scale version achievable later.</li>
-          </ul>
+        <div class="grid2">
+          <div class="card pad">
+            <h2 style="font-size:16px;margin:0 0 6px 0;">Project goal</h2>
+            <ul class="list">
+              <li><b>Immersion:</b> connect hardware motion cues to driving actions.</li>
+              <li><b>Responsiveness:</b> motion reacts in real time (low latency, repeatable behavior).</li>
+              <li><b>Buildability:</b> prototype under school/time constraints while documenting clearly.</li>
+            </ul>
+          </div>
+
+          <div class="card pad">
+            <h2 style="font-size:16px;margin:0 0 6px 0;">Success criteria</h2>
+            <ul class="list">
+              <li>A working prototype that proves the control loop (command → Arduino → motion output).</li>
+              <li>Proof-first documentation: wiring, code, timeline, blockers, and testing notes.</li>
+              <li>Clear next steps showing how the full-scale version becomes achievable later.</li>
+            </ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- WHAT I BUILT -->
-    <section id="what">
-      <div class="head">
-        <h2>What I built</h2>
-        <p>
-          Two-phase approach: full-scale design and research first, then a mini prototype to lock in the core control loop.
-        </p>
-      </div>
-
-      <div class="grid3">
-        <div class="card glowy">
-          <h3>Phase 1 (Weeks 1–9)</h3>
-          <p>
-            Full rig vision: seat + motion actuators + VR integration plan. Researched components, designed architecture,
-            and documented the approach in GitHub-style logs.
-          </p>
-        </div>
-
-        <div class="card glowy">
-          <h3>Phase 2 (Weeks 10–13)</h3>
-          <p>
-            Mini prototype pivot: built a smaller hardware version that demonstrates responsive motion/steering control on command,
-            then debugged it into a stable final project.
-          </p>
-        </div>
-
-        <div class="card glowy">
-          <h3>System concept</h3>
-          <p>
-            The long-term design is a command/telemetry loop:
-          </p>
-          <div class="callout note">
-            <span class="mono">Inputs (wheel/telemetry) → PC script → Serial → Arduino → Driver → Actuator/Servo → Motion cue</span>
+    <!-- BUILD -->
+    <section id="build">
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>What I built</h2>
+            <p class="sub">
+              Two-phase approach: design/research first, then a mini prototype pivot to “ship” a working build
+              and prove the most important technical requirement.
+            </p>
           </div>
         </div>
-      </div>
 
-      <div class="callout warn">
-        <strong>Engineering honesty:</strong> “Fast actuator” listings often quote <b>no-load</b> speed.
-        Under real load, speed can drop hard. Any future iteration should test speed <b>under load</b> and document it.
+        <div class="grid2">
+          <div class="card pad">
+            <h2 style="font-size:16px;margin:0 0 6px 0;">Phase 1 (Weeks 1–9): full rig concept</h2>
+            <p class="sub" style="margin-top:0;">
+              Seat motion plan + actuator research + architecture for future VR integration.
+              This phase produced the “what we want to build” and the engineering plan to get there.
+            </p>
+            <div class="callout">
+              <b>Key lesson:</b> “fast” actuator specs are often no-load numbers.
+              Under real load, speed drops. Testing under load matters.
+            </div>
+          </div>
+
+          <div class="card pad">
+            <h2 style="font-size:16px;margin:0 0 6px 0;">Phase 2 (Weeks 10–13): mini prototype pivot</h2>
+            <p class="sub" style="margin-top:0;">
+              A smaller build demonstrating responsive motion/steering control on command.
+              This proves the control loop, while mechanical scale-up becomes the next milestone.
+            </p>
+            <div class="callout">
+              <b>Why the pivot is defendable:</b> it keeps progress real.
+              The project ends with a working prototype + documented blockers, not just a big plan.
+            </div>
+          </div>
+        </div>
+
+        <div class="card pad" style="margin-top:14px;">
+          <h2 style="font-size:16px;margin:0 0 6px 0;">System concept (long-term)</h2>
+          <p class="sub" style="margin-top:0;">
+            Inputs (wheel/telemetry) → PC script → Serial → Arduino → Driver → Actuator/Servo → Motion cue
+          </p>
+          <div class="links">
+            <!-- Replace these with your real links -->
+            <a class="pill" href="https://github.com/VuppunuthulaSanjit/FinalProject" target="_blank" rel="noreferrer">Repo (replace if needed)</a>
+            <a class="pill" href="#proof">Evidence & code</a>
+            <a class="pill" href="#next">Next milestones</a>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- PROOF -->
     <section id="proof">
-      <div class="head">
-        <h2>What I finished (with proof)</h2>
-        <p>
-          Replace placeholders with your own photos/screenshots and links. This section is structured so every claim can be graded quickly.
-        </p>
-      </div>
-
-      <div class="grid2" style="margin-top:16px;">
-        <div class="card">
-          <h3>Proof: Wiring + Arduino control (example structure)</h3>
-          <p>
-            Step-by-step wiring and a serial-command Arduino sketch (<span class="mono">EXTEND / RETRACT / STOP</span>) for actuator control.
-          </p>
-
-          <div class="media">
-            <div class="imgwrap">
-              <img class="zoom" src="assets/rig_full.jpg" alt="Full rig / wiring proof (optional) — add assets/rig_full.jpg" loading="lazy"
-                   onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-              <div class="ph" style="display:none;">
-                <div>
-                  <b>Optional proof photo</b><br>
-                  Add <span class="mono">assets/rig_full.jpg</span><br>
-                  (wiring, breadboard, driver, actuator)
-                </div>
-              </div>
-            </div>
-            <div class="caption">Add a real photo here — even a phone pic. This design makes it look polished.</div>
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>What I finished (with proof)</h2>
+            <p class="sub">
+              This section is structured so every claim is gradeable.
+              Swap placeholders with your own photos/screenshots and links.
+            </p>
           </div>
+        </div>
 
-          <details>
-            <summary>Show Arduino example (serial-controlled actuator)</summary>
-            <pre><code>// Basic serial-controlled linear actuator
+        <div class="proof-grid">
+          <div class="card">
+            <div class="pad" style="padding:18px 18px 12px;">
+              <h2 style="font-size:16px;margin:0 0 6px 0;">Proof: Wiring + Arduino control (linear actuator example)</h2>
+              <p class="sub" style="margin-top:0;">
+                Step-by-step wiring and a serial-command Arduino sketch (<b>EXTEND / RETRACT / STOP</b>) for actuator control.
+                If you didn’t end up using the actuator in the final mini build, keep this as documented research/proof-of-learning.
+              </p>
+
+              <pre><code>// Basic serial-controlled linear actuator (example)
 int in1 = 8;
 int in2 = 9;
 int ena = 10;
@@ -857,38 +724,31 @@ void loop() {
     }
   }
 }</code></pre>
-          </details>
 
-          <div class="links">
-            <a class="link" href="https://github.com/VuppunuthulaSanjit/arduino-actuator-control" target="_blank" rel="noreferrer">Repo link ↗</a>
-            <a class="link" href="https://www.amazon.com/Firgelli-Speed-Linear-Actuator-22lbs/dp/B017S3GULY?th=1" target="_blank" rel="noreferrer">Actuator reference ↗</a>
-          </div>
-        </div>
-
-        <div class="card">
-          <h3>Proof: Mini prototype build (servo/motor motion)</h3>
-          <p>
-            Mini version demonstrates the control loop: command → Arduino → motion output. This is the “hard part” proven under constraints.
-          </p>
-
-          <div class="media">
-            <div class="imgwrap">
-              <img class="zoom" src="assets/rig_mini.jpg" alt="Mini prototype proof (optional) — add assets/rig_mini.jpg" loading="lazy"
-                   onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-              <div class="ph" style="display:none;">
-                <div>
-                  <b>Optional proof photo</b><br>
-                  Add <span class="mono">assets/rig_mini.jpg</span><br>
-                  (servo setup / mini rig)
-                </div>
+              <div class="links">
+                <!-- Replace these -->
+                <a class="pill" href="https://github.com/VuppunuthulaSanjit/arduino-actuator-control" target="_blank" rel="noreferrer">Actuator code repo</a>
+                <a class="pill" href="https://www.amazon.com/Firgelli-Speed-Linear-Actuator-22lbs/dp/B017S3GULY?th=1" target="_blank" rel="noreferrer">Actuator reference</a>
               </div>
             </div>
-            <div class="caption">Add a photo or screenshot of the mini build + how it moves (even a simple image works).</div>
+
+            <div class="media">
+              <div class="imgbox" data-img="assets/rig_full.jpg"></div>
+              <div class="small" style="margin-top:10px;">
+                Add a phone pic of wiring/driver/actuator as: <span style="font-family:var(--mono);">assets/rig_full.jpg</span>
+              </div>
+            </div>
           </div>
 
-          <details>
-            <summary>Show example servo-control snippet</summary>
-            <pre><code>#include &lt;Servo.h&gt;
+          <div class="card">
+            <div class="pad" style="padding:18px 18px 12px;">
+              <h2 style="font-size:16px;margin:0 0 6px 0;">Proof: Mini prototype (servo/motor motion)</h2>
+              <p class="sub" style="margin-top:0;">
+                This is the delivered build: a mini version proving <b>command → Arduino → motion output</b>.
+                The point is low-latency, repeatable control (not perfect realism yet).
+              </p>
+
+              <pre><code>#include &lt;Servo.h&gt;
 Servo s;
 const int servoPin = 6;
 
@@ -902,507 +762,469 @@ void loop() {
   if (Serial.available()) {
     String cmd = Serial.readStringUntil('\n');
     cmd.trim();
-    if (cmd == "LEFT") s.write(45);
-    if (cmd == "RIGHT") s.write(135);
+
+    if (cmd == "LEFT")   s.write(45);
+    if (cmd == "RIGHT")  s.write(135);
     if (cmd == "CENTER") s.write(90);
   }
 }</code></pre>
-          </details>
 
-          <div class="callout good">
-            <strong>Why the pivot is defensible:</strong> it proves the core technical requirement (responsive control)
-            while leaving mechanical scale-up as the next milestone.
+              <div class="callout">
+                <b>Why this matters:</b> scaling up is “just engineering work” once the control loop is proven.
+                The mini build proves the hardest part under real school constraints.
+              </div>
+            </div>
+
+            <div class="media">
+              <div class="imgbox" data-img="assets/rig_mini.jpg"></div>
+              <div class="small" style="margin-top:10px;">
+                Add a photo of the mini build as: <span style="font-family:var(--mono);">assets/rig_mini.jpg</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
-      <div class="card" style="margin-top:14px;">
-        <h3>Research + references used for comparison</h3>
-        <p>
-          Similar community builds used to compare motors, approaches, drivers, and feasibility:
-        </p>
-        <div class="links">
-          <a class="link" href="https://www.xsimulator.net/community/threads/smc3-arduino-3dof-motor-driver-and-windows-utilities.4957/" target="_blank" rel="noreferrer">SMC3 Arduino 3DOF ↗</a>
-          <a class="link" href="https://www.xsimulator.net/community/threads/2dof-racecar-simulator-using-arduino-and-linear-actuators.11923/" target="_blank" rel="noreferrer">2DOF racecar sim ↗</a>
-          <a class="link" href="https://www.xsimulator.net/community/threads/diy-d-box-style-for-vr-3-dof.11524/" target="_blank" rel="noreferrer">DIY “D-Box style” 3DOF ↗</a>
+        <div class="card pad" style="margin-top:14px;">
+          <h2 style="font-size:16px;margin:0 0 6px 0;">Research references used for comparison</h2>
+          <p class="sub" style="margin-top:0;">
+            Similar community builds used to compare motors, approaches, drivers, and feasibility:
+          </p>
+          <div class="links">
+            <a class="pill" href="https://www.xsimulator.net/community/threads/smc3-arduino-3dof-motor-driver-and-windows-utilities.4957/" target="_blank" rel="noreferrer">SMC3 Arduino 3DOF</a>
+            <a class="pill" href="https://www.xsimulator.net/community/threads/2dof-racecar-simulator-using-arduino-and-linear-actuators.11923/" target="_blank" rel="noreferrer">2DOF racecar sim</a>
+            <a class="pill" href="https://www.xsimulator.net/community/threads/diy-d-box-style-for-vr-3-dof.11524/" target="_blank" rel="noreferrer">DIY “D-Box style” 3DOF</a>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- TIMELINE -->
     <section id="timeline">
-      <div class="head">
-        <h2>Timeline (Week-by-week)</h2>
-        <p>
-          Each week has a photo slot (<span class="mono">assets/weekXX.jpg</span>) and a short engineering-grade summary.
-          Missing photos are fine — the site shows a clean placeholder automatically.
-        </p>
-      </div>
-
-      <div class="timeline">
-        <!-- Weeks 1–9 (Phase 1) -->
-        <div class="titem">
-          <div class="pin">1</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 1 — Research plan + system vision</b>
-              <span class="tag">Phase 1</span>
-            </div>
-            <p class="muted">
-              Defined the project goal: a VR racing simulator prototype with motion feedback. Established early success criteria,
-              initial architecture, and what “realistic motion” should mean for a driver in VR.
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Timeline (Week-by-week)</h2>
+            <p class="sub">
+              Weeks 1–4 are research/planning (no images required).
+              Weeks 5–13 have optional photo slots (<span style="font-family:var(--mono);">assets/weekXX.jpg</span>).
+              Missing photos are fine — you’ll see a clean placeholder.
             </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week01.jpg" alt="Week 1 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 1 photo</b><br>Add <span class="mono">assets/week01.jpg</span></div></div>
-              </div>
-              <div class="caption">Suggested: research notes, early sketch, parts list screenshot.</div>
-            </div>
           </div>
         </div>
 
-        <div class="titem">
-          <div class="pin">2</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 2 — Requirements + parts planning</b>
-              <span class="tag">Phase 1</span>
-            </div>
-            <p class="muted">
-              Outlined requirements (hardware, software, VR). Started sourcing core components and defining a feasible MVP path,
-              including what could be built first semester vs second semester.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week02.jpg" alt="Week 2 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 2 photo</b><br>Add <span class="mono">assets/week02.jpg</span></div></div>
+        <div class="timeline">
+          <div class="rail"></div>
+
+          <!-- Week 1 (NO IMAGE) -->
+          <div class="titem">
+            <div class="pin">1</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 1 — Research plan + system vision</b>
+                  <span class="phase">Phase 1</span>
+                </div>
+                <p>
+                  Defined the project goal: a VR racing simulator prototype with motion feedback.
+                  Established success criteria, architecture direction, and what “realistic motion” should mean in VR.
+                </p>
               </div>
-              <div class="caption">Suggested: wishlist screenshot, requirements notes, component chart.</div>
             </div>
           </div>
-        </div>
 
-        <div class="titem">
-          <div class="pin">3</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 3 — Technical approach + module breakdown</b>
-              <span class="tag">Phase 1</span>
-            </div>
-            <p class="muted">
-              Planned key modules: inputs, vehicle physics/logic (concept), serial interface to Arduino, and documentation workflow.
-              Defined how GitHub would track daily contributions and progress evidence.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week03.jpg" alt="Week 3 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 3 photo</b><br>Add <span class="mono">assets/week03.jpg</span></div></div>
+          <!-- Week 2 (NO IMAGE) -->
+          <div class="titem">
+            <div class="pin">2</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 2 — Requirements + parts planning</b>
+                  <span class="phase">Phase 1</span>
+                </div>
+                <p>
+                  Outlined requirements (hardware, software, VR), early bill-of-materials thinking, and what could be achievable within semester constraints.
+                </p>
               </div>
-              <div class="caption">Suggested: architecture diagram or flow chart.</div>
             </div>
           </div>
-        </div>
 
-        <div class="titem">
-          <div class="pin">4</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 4 — Motion realism research</b>
-              <span class="tag">Phase 1</span>
-            </div>
-            <p class="muted">
-              Compared motion types (heave vs pitch/roll) and what matters most for racing immersion.
-              Identified that perceived realism often comes from fast response and cue timing more than large travel distance.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week04.jpg" alt="Week 4 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 4 photo</b><br>Add <span class="mono">assets/week04.jpg</span></div></div>
+          <!-- Week 3 (NO IMAGE) -->
+          <div class="titem">
+            <div class="pin">3</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 3 — Technical approach + module breakdown</b>
+                  <span class="phase">Phase 1</span>
+                </div>
+                <p>
+                  Planned core modules and how GitHub would track progress: control interface, command pipeline, documentation logs, and an integration path for future telemetry.
+                </p>
               </div>
-              <div class="caption">Suggested: notes comparing actuator speeds / DOF options.</div>
             </div>
           </div>
-        </div>
 
-        <div class="titem">
-          <div class="pin">5</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 5 — GitHub documentation structure</b>
-              <span class="tag">Phase 1</span>
-            </div>
-            <p class="muted">
-              Built out documentation expectations: weekly logs, proof-first evidence, and clear deliverables. Ensured the project can be understood
-              by someone who wasn’t in the room.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week05.jpg" alt="Week 5 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 5 photo</b><br>Add <span class="mono">assets/week05.jpg</span></div></div>
+          <!-- Week 4 (NO IMAGE) -->
+          <div class="titem">
+            <div class="pin">4</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 4 — Motion realism research</b>
+                  <span class="phase">Phase 1</span>
+                </div>
+                <p>
+                  Compared motion types (heave vs pitch/roll) and identified that perceived realism often comes from fast response and cue timing more than large travel distance.
+                </p>
               </div>
-              <div class="caption">Suggested: README screenshot or commit history screenshot.</div>
             </div>
           </div>
-        </div>
 
-        <div class="titem">
-          <div class="pin">6</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 6 — Revised timeline + test plan</b>
-              <span class="tag">Phase 1</span>
-            </div>
-            <p class="muted">
-              Updated milestone schedule (bugs, responsiveness, peer feedback, UI polish). Clarified what’s realistically achievable and what
-              needs a second semester or different hardware.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week06.jpg" alt="Week 6 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 6 photo</b><br>Add <span class="mono">assets/week06.jpg</span></div></div>
+          <!-- Week 5 -->
+          <div class="titem">
+            <div class="pin">5</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 5 — GitHub documentation structure</b>
+                  <span class="phase">Phase 1</span>
+                </div>
+                <p>
+                  Built documentation expectations: weekly logs, proof-first evidence, and clear deliverables so the project can be graded quickly and replicated by someone new.
+                </p>
               </div>
-              <div class="caption">Suggested: updated timeline screenshot or task board.</div>
+              <div class="tmedia">
+                <div class="imgbox" data-img="assets/week05.jpg"></div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="titem">
-          <div class="pin">7</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 7 — PC ↔ Arduino integration research</b>
-              <span class="tag">Phase 1</span>
-            </div>
-            <p class="muted">
-              Designed the command pipeline: PC reads inputs → serial sends commands → Arduino drives a motor driver and actuator.
-              Identified that software + hardware timing would be a major success/failure factor.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week07.jpg" alt="Week 7 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 7 photo</b><br>Add <span class="mono">assets/week07.jpg</span></div></div>
+          <!-- Week 6 -->
+          <div class="titem">
+            <div class="pin">6</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 6 — Revised timeline + testing plan</b>
+                  <span class="phase">Phase 1</span>
+                </div>
+                <p>
+                  Updated milestones (bugs, responsiveness, peer feedback). Clarified what’s realistic now vs what requires different hardware or a longer build window.
+                </p>
               </div>
-              <div class="caption">Suggested: serial flow diagram or PC script concept notes.</div>
+              <div class="tmedia">
+                <div class="imgbox" data-img="assets/week06.jpg"></div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="titem">
-          <div class="pin">8</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 8 — Wiring guide + actuator control code</b>
-              <span class="tag">Phase 1</span>
-            </div>
-            <p class="muted">
-              Created step-by-step instructions to connect a linear actuator to an Arduino via motor driver,
-              plus a serial-command Arduino sketch for EXTEND/RETRACT/STOP.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week08.jpg" alt="Week 8 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 8 photo</b><br>Add <span class="mono">assets/week08.jpg</span></div></div>
+          <!-- Week 7 -->
+          <div class="titem">
+            <div class="pin">7</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 7 — PC ↔ Arduino integration research</b>
+                  <span class="phase">Phase 1</span>
+                </div>
+                <p>
+                  Designed the pipeline: PC reads inputs → serial sends commands → Arduino drives motor/servo. Identified timing + latency as the biggest risk to “feels real.”
+                </p>
               </div>
-              <div class="caption">Suggested: wiring diagram screenshot + Arduino IDE screenshot.</div>
+              <div class="tmedia">
+                <div class="imgbox" data-img="assets/week07.jpg"></div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="titem">
-          <div class="pin">9</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 9 — Feasibility check + speed constraint discovered</b>
-              <span class="tag">Transition</span>
-            </div>
-            <p class="muted">
-              Confirmed a major blocker: the initial linear actuator approach was too slow for realistic motion feedback.
-              Began researching higher-speed alternatives and considering a scaled prototype to keep progress moving.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week09.jpg" alt="Week 9 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 9 photo</b><br>Add <span class="mono">assets/week09.jpg</span></div></div>
+          <!-- Week 8 -->
+          <div class="titem">
+            <div class="pin">8</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 8 — Wiring guide + actuator control code</b>
+                  <span class="phase">Phase 1</span>
+                </div>
+                <p>
+                  Produced a step-by-step wiring guide (Arduino + driver + actuator) and serial command code (EXTEND/RETRACT/STOP). Documented power + safety considerations.
+                </p>
               </div>
-              <div class="caption">Suggested: notes comparing actuator speed specs or alternative motors.</div>
+              <div class="tmedia">
+                <div class="imgbox" data-img="assets/week08.jpg"></div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Weeks 10–13 (Phase 2) — using YOUR exact details -->
-        <div class="titem">
-          <div class="pin">10</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 10 — Pivot to mini version (strategic de-risk)</b>
-              <span class="tag">Phase 2</span>
-            </div>
-            <p class="muted">
-              Decided to switch to a mini version because the bigger motion rig wasn’t viable within constraints.
-              Researched YouTube guides and parts to build a smaller prototype that still proves real-time hardware control.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week10.jpg" alt="Week 10 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 10 photo</b><br>Add <span class="mono">assets/week10.jpg</span></div></div>
+          <!-- Week 9 -->
+          <div class="titem">
+            <div class="pin">9</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 9 — Feasibility check + speed constraint discovered</b>
+                  <span class="phase">Transition</span>
+                </div>
+                <p>
+                  Found the blocker: the actuator approach was too slow for realistic motion feedback. Began evaluating faster alternatives and planned a pivot to keep progress real.
+                </p>
               </div>
-              <div class="caption">Suggested: screenshot of tutorial shortlist + parts list.</div>
+              <div class="tmedia">
+                <div class="imgbox" data-img="assets/week09.jpg"></div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="titem">
-          <div class="pin">11</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 11 — Attempt #1 scrapped (missing H-bridge)</b>
-              <span class="tag">Phase 2</span>
-            </div>
-            <p class="muted">
-              Jaydon and Sanjit found a tutorial that should work, but it required an H-bridge motor driver we didn’t have access to.
-              Since the missing part was essential, we scrapped the approach instead of forcing an unstable workaround.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week11.jpg" alt="Week 11 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 11 photo</b><br>Add <span class="mono">assets/week11.jpg</span></div></div>
+          <!-- Week 10 -->
+          <div class="titem">
+            <div class="pin">10</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 10 — Pivot to mini version (strategic de-risk)</b>
+                  <span class="phase">Phase 2</span>
+                </div>
+                <p>
+                  Decided to switch to a mini version because the bigger rig wasn’t viable within constraints.
+                  Researched tutorials + parts to prove real-time control in a smaller build.
+                </p>
               </div>
-              <div class="caption">Suggested: screenshot showing missing part requirement or shopping list.</div>
+              <div class="tmedia">
+                <div class="imgbox" data-img="assets/week10.jpg"></div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="titem">
-          <div class="pin">12</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 12 — Successful build + code debug</b>
-              <span class="tag">Phase 2</span>
-            </div>
-            <p class="muted">
-              Found a simpler video using only available parts. Jaydon and Sanjit started building and finished near the end of the week.
-              Mohith helped get starter code, and the group debugged and fixed it until motion/control behaved reliably.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week12.jpg" alt="Week 12 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 12 photo</b><br>Add <span class="mono">assets/week12.jpg</span></div></div>
+          <!-- Week 11 -->
+          <div class="titem">
+            <div class="pin">11</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 11 — Attempt #1 scrapped (missing H-bridge)</b>
+                  <span class="phase">Phase 2</span>
+                </div>
+                <p>
+                  Jaydon and Sanjit found a video that should work, but it required an H-bridge driver that wasn’t available.
+                  Scrapped it instead of forcing a risky workaround.
+                </p>
               </div>
-              <div class="caption">Suggested: photo of assembled prototype + Arduino IDE screenshot.</div>
+              <div class="tmedia">
+                <div class="imgbox" data-img="assets/week11.jpg"></div>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="titem">
-          <div class="pin">13</div>
-          <div class="tcard">
-            <div class="trow">
-              <b>Week 13 — Finalized project + VR/wheel integration research</b>
-              <span class="tag">Final</span>
-            </div>
-            <p class="muted">
-              Finished the final project. Added Evan Chen, who attempted to integrate a VR component.
-              Sanjit researched adding Logitech G27 wheel control so motion responds to wheel commands.
-              This was blocked because COM/serial access is restricted by school admin policies on the Chromebook.
-              As a workaround, we found a website that can read and output real-time G27 wheel values for future forwarding to Arduino on an unrestricted device.
-            </p>
-            <div class="media">
-              <div class="imgwrap">
-                <img class="zoom" src="assets/week13.jpg" alt="Week 13 photo" loading="lazy"
-                     onerror="this.style.display='none'; this.parentElement.querySelector('.ph').style.display='flex';">
-                <div class="ph" style="display:none;"><div><b>Week 13 photo</b><br>Add <span class="mono">assets/week13.jpg</span></div></div>
+          <!-- Week 12 -->
+          <div class="titem">
+            <div class="pin">12</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 12 — Successful build + code debug</b>
+                  <span class="phase">Phase 2</span>
+                </div>
+                <p>
+                  Found a simpler tutorial using available parts. Jaydon and Sanjit built the hardware and finished near the end of the week.
+                  Mohith provided starter code; the group debugged it into stable behavior.
+                </p>
               </div>
-              <div class="caption">Suggested: photo of final build + screenshot of wheel value website.</div>
+              <div class="tmedia">
+                <div class="imgbox" data-img="assets/week12.jpg"></div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <div class="callout good">
-        <strong>Timeline narrative (what a grader should learn):</strong>
-        We started with a big vision, discovered real constraints, pivoted smartly, shipped a working prototype, and documented blockers + next steps.
+          <!-- Week 13 -->
+          <div class="titem">
+            <div class="pin">13</div>
+            <div class="tcard">
+              <div class="tpad">
+                <div class="trow">
+                  <b>Week 13 — Final project + VR/wheel integration research</b>
+                  <span class="phase">Final</span>
+                </div>
+                <p>
+                  Finalized the project. Added Evan Chen to attempt VR integration. Sanjit researched adding Logitech G27 wheel control so motion responds to wheel commands.
+                  This was blocked because serial/COM access is restricted on the school Chromebook. As a workaround, the team found a website that outputs G27 wheel values for future forwarding to Arduino on an unrestricted device.
+                </p>
+              </div>
+              <div class="tmedia">
+                <div class="imgbox" data-img="assets/week13.jpg"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="card pad" style="margin-top:14px;">
+          <b>Timeline narrative (what a grader should learn):</b>
+          <p class="sub" style="margin-top:6px;">
+            Big vision → constraints discovered → smart pivot → working prototype shipped → blockers and next steps clearly documented.
+          </p>
+        </div>
       </div>
     </section>
 
     <!-- NEXT STEPS -->
     <section id="next">
-      <div class="head">
-        <h2>Next steps</h2>
-        <p>
-          Clear, testable actions that move from “working prototype” to “wheel-driven motion system.”
-        </p>
-      </div>
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Next steps</h2>
+            <p class="sub">
+              These are testable, measurable actions that move from “working prototype” to “wheel-driven motion system.”
+            </p>
+          </div>
+        </div>
 
-      <div class="grid2">
-        <div class="card">
-          <h3>Immediate (next 1–2 weeks)</h3>
-          <ul>
-            <li>Implement a PC-side script that streams wheel values smoothly (rate limit + smoothing).</li>
-            <li>Define a mapping from wheel angle → servo angle (with calibration + deadzone).</li>
-            <li>Log latency and jitter (what “real-time” actually is in ms).</li>
+        <div class="grid2">
+          <div class="card pad">
+            <h2 style="font-size:16px;margin:0 0 6px 0;">Immediate (next 1–2 weeks)</h2>
+            <ul class="list">
+              <li>Implement a PC-side script that streams wheel values smoothly (rate limit + smoothing).</li>
+              <li>Define mapping from wheel angle → servo angle (calibration + deadzone).</li>
+              <li>Measure latency + jitter (what “real-time” is in milliseconds).</li>
+            </ul>
+          </div>
+
+          <div class="card pad">
+            <h2 style="font-size:16px;margin:0 0 6px 0;">Near-term milestone</h2>
+            <ul class="list">
+              <li>Add failsafes: software STOP + physical kill switch for any motorized motion.</li>
+              <li>Upgrade driver hardware if overheating/instability appears under load.</li>
+              <li>Re-mount mechanism to reduce flex so motion is repeatable and safe.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card pad" style="margin-top:14px;">
+          <h2 style="font-size:16px;margin:0 0 6px 0;">Level-up milestone</h2>
+          <ul class="list">
+            <li>Replace “command-only” with real input integration (wheel telemetry → live motion).</li>
+            <li>Explore adding VR + motion cueing logic (comfort tuning, soft start/stop curves).</li>
+            <li>Document the final architecture as a reproducible build guide.</li>
           </ul>
         </div>
-        <div class="card">
-          <h3>Near-term (next milestone)</h3>
-          <ul>
-            <li>Add a fail-safe: software STOP + physical kill switch for any motorized motion.</li>
-            <li>Upgrade driver hardware if current driver can’t handle load reliably (avoid overheating).</li>
-            <li>Mount the mechanism to reduce flex so motion is repeatable and safe.</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:14px;">
-        <h3>“Level-up” milestone</h3>
-        <p>
-          A full closed-loop demo: the wheel moves → the system reads values → Arduino receives commands → servo/motor responds smoothly.
-          The website displays the evidence: code, wiring, and measured performance.
-        </p>
       </div>
     </section>
 
     <!-- HELP -->
     <section id="help">
-      <div class="head">
-        <h2>What I need help with</h2>
-        <p>
-          These are targeted questions that unlock the next milestone.
-        </p>
-      </div>
+      <div class="container">
+        <div class="section-title">
+          <div>
+            <h2>Help needed (so I can keep making progress)</h2>
+            <p class="sub">
+              The current blocker is school Chromebook restrictions. This section asks for targeted help to keep momentum.
+            </p>
+          </div>
+        </div>
 
-      <div class="grid3">
-        <div class="card">
-          <h3>Wheel → Arduino pipeline</h3>
-          <p>
-            What’s the cleanest way to read G27 wheel values and send them over serial without spamming commands
-            (and while handling school device restrictions)?
-          </p>
-        </div>
-        <div class="card">
-          <h3>Driver selection</h3>
-          <p>
-            If an H-bridge is required, what driver is reliable for our current draw, and how should we wire it with safe grounding + protection?
-          </p>
-        </div>
-        <div class="card">
-          <h3>Motion realism</h3>
-          <p>
-            With limited travel and budget, what cues matter most for racing immersion (quick tilt cues vs vertical heave)?
-          </p>
-        </div>
-      </div>
+        <div class="grid2">
+          <div class="card pad">
+            <h2 style="font-size:16px;margin:0 0 6px 0;">What I need help with</h2>
+            <ul class="list">
+              <li>How to read Logitech G27 wheel values on a device that allows serial/COM access.</li>
+              <li>How to forward wheel angle values to Arduino smoothly (no jitter, no spam).</li>
+              <li>Best practice mapping (deadzone, curve, limits) from wheel → servo angle.</li>
+            </ul>
+          </div>
 
-      <div class="callout note">
-        <strong>Copy/paste help prompt (use this to get precise answers fast):</strong><br>
-        “I have a Logitech G27. I can get real-time wheel values as numbers. I need a PC-side script (Windows/Mac/Linux)
-        that rate-limits and smooths values, then sends serial commands to Arduino. I also need a safe driver recommendation for my motor current.”
+          <div class="card pad">
+            <h2 style="font-size:16px;margin:0 0 6px 0;">What I can provide</h2>
+            <ul class="list">
+              <li>Current Arduino code and wiring photos.</li>
+              <li>Link to the wheel-value website we found.</li>
+              <li>Short demo video of the mini build responding to commands.</li>
+            </ul>
+            <div class="callout">
+              If you’re reading this as a mentor/teacher: the next milestone is measurable —
+              wheel angle should control servo angle with stable timing and clear safety constraints.
+            </div>
+          </div>
+        </div>
+
+        <div class="card pad" style="margin-top:14px;">
+          <h2 style="font-size:16px;margin:0 0 6px 0;">Deliverables checklist (to make this “100% submit-ready”)</h2>
+          <ul class="list">
+            <li>Add 6–10 photos total in <span style="font-family:var(--mono);">assets/</span> (hero, mini rig, week10–13, wiring).</li>
+            <li>Add 1 short demo video link (YouTube unlisted / Drive link) in the Proof section.</li>
+            <li>Confirm repo has <span style="font-family:var(--mono);">index.html</span> in root + GitHub Pages enabled.</li>
+          </ul>
+        </div>
       </div>
     </section>
 
     <footer>
-      <div>
-        <b>VR Racing Motion Rig</b>
-        <small>Single-file GitHub Pages site • Black/gray theme • Proof-first timeline • Lightbox images</small>
+      <div class="container">
+        <div class="hr"></div>
+        <div>
+          Built for GitHub Pages • One-file site (index.html) • Black/gray premium theme
+          <br/>
+          Replace photo slots by adding images into <span style="font-family:var(--mono);">assets/</span>.
+        </div>
       </div>
-      <a class="link" href="#top">Back to top ↑</a>
     </footer>
-  </main>
-
-  <!-- Lightbox -->
-  <div class="lightbox" id="lb" aria-hidden="true" role="dialog" aria-label="Image preview">
-    <button class="xbtn" id="x" aria-label="Close preview">✕</button>
-    <img id="lbimg" alt="Preview" />
-    <div class="hint">Press <span class="mono">Esc</span> to close</div>
   </div>
 
   <script>
-    // ===== Scroll progress =====
-    const bar = document.getElementById("bar");
-    function prog(){
-      const h = document.documentElement;
-      const scrolled = h.scrollTop;
-      const height = h.scrollHeight - h.clientHeight;
-      const pct = height > 0 ? (scrolled / height) * 100 : 0;
-      bar.style.width = pct + "%";
-    }
-    document.addEventListener("scroll", prog, { passive:true });
-    prog();
-
-    // ===== Scrollspy =====
-    const navLinks = [...document.querySelectorAll(".navlinks a[data-spy]")];
-    const sections = navLinks.map(a => document.getElementById(a.dataset.spy)).filter(Boolean);
-
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if(!e.isIntersecting) return;
-        const id = e.target.id;
-        navLinks.forEach(a => a.classList.toggle("active", a.dataset.spy === id));
-      });
-    }, { rootMargin: "-35% 0px -60% 0px", threshold: 0.01 });
-
-    sections.forEach(s => io.observe(s));
-
-    // ===== Drawer (mobile) =====
-    const burger = document.getElementById("burger");
-    const drawer = document.getElementById("drawer");
-    const closeBtn = document.getElementById("close");
-
-    function openDrawer(){
-      drawer.classList.add("open");
-      drawer.setAttribute("aria-hidden","false");
-      burger.setAttribute("aria-expanded","true");
-    }
-    function closeDrawer(){
-      drawer.classList.remove("open");
-      drawer.setAttribute("aria-hidden","true");
-      burger.setAttribute("aria-expanded","false");
-    }
-    burger.addEventListener("click", () => drawer.classList.contains("open") ? closeDrawer() : openDrawer());
-    closeBtn.addEventListener("click", closeDrawer);
-    drawer.addEventListener("click", (e) => { if(e.target === drawer) closeDrawer(); });
-    drawer.querySelectorAll("a").forEach(a => a.addEventListener("click", closeDrawer));
-
-    // ===== Lightbox (click-to-zoom images) =====
-    const lb = document.getElementById("lb");
-    const lbimg = document.getElementById("lbimg");
-    const x = document.getElementById("x");
-
-    function openLB(src, alt){
-      lbimg.src = src;
-      lbimg.alt = alt || "Preview";
-      lb.classList.add("open");
-      lb.setAttribute("aria-hidden","false");
-    }
-    function closeLB(){
-      lb.classList.remove("open");
-      lb.setAttribute("aria-hidden","true");
-      lbimg.src = "";
-    }
-
-    // Only open if the image actually loaded
-    document.querySelectorAll("img.zoom").forEach(img => {
-      img.addEventListener("click", () => {
-        if (!img.complete || img.naturalWidth === 0) return;
-        openLB(img.src, img.alt);
+    // Mobile menu
+    const btn = document.getElementById('menuBtn');
+    const mobile = document.getElementById('mobileNav');
+    btn?.addEventListener('click', () => {
+      const open = mobile.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    // Close mobile menu on click
+    document.querySelectorAll('#mobileNav a').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        mobile.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
       });
     });
 
-    x.addEventListener("click", closeLB);
-    lb.addEventListener("click", (e) => { if(e.target === lb) closeLB(); });
-    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeLB(); });
+    // Smart image loader:
+    // - If the file exists, show it.
+    // - If it doesn't, show a clean placeholder automatically.
+    function mountImgBox(box, path){
+      const img = new Image();
+      img.alt = "Proof image";
+      img.loading = "lazy";
+      img.onload = () => {
+        box.innerHTML = "";
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "cover";
+        box.appendChild(img);
+      };
+      img.onerror = () => {
+        box.innerHTML = `<div class="placeholder">
+          Optional image<br/><code>${path}</code>
+        </div>`;
+      };
+      img.src = path;
+    }
+
+    document.querySelectorAll('.imgbox[data-img]').forEach(box=>{
+      const path = box.getAttribute('data-img');
+      if(path) mountImgBox(box, path);
+    });
+
+    // Hero image
+    (function(){
+      const hero = document.getElementById('heroImg');
+      const ph = document.getElementById('heroPlaceholder');
+      const tryPath = "assets/hero.jpg";
+      const img = new Image();
+      img.onload = () => {
+        hero.src = tryPath;
+        hero.style.display = "block";
+        ph.style.display = "none";
+      };
+      img.onerror = () => {};
+      img.src = tryPath;
+    })();
   </script>
 </body>
 </html>
