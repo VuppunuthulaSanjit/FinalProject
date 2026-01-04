@@ -437,6 +437,32 @@
     }
     .tmedia .imgbox{ aspect-ratio: 21/9; }
 
+    /* Video embeds */
+    .two-videos{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    @media (max-width: 860px){
+      .two-videos{ grid-template-columns: 1fr; }
+    }
+    .video-embed{
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.18);
+    }
+    .video-embed iframe{
+      position:absolute;
+      inset:0;
+      width:100%;
+      height:100%;
+      border:0;
+    }
+
     /* Footer */
     footer{
       padding: 38px 0 46px;
@@ -494,7 +520,7 @@
             <a class="pill" href="#help">Help</a>
           </div>
         </div>
-        
+
     <!-- HERO -->
     <header class="hero">
       <div class="container">
@@ -1028,7 +1054,7 @@ void loop() {
             <div class="tcard">
               <div class="tpad">
                 <div class="trow">
-                  <b>Week 13 — Final project + VR/wheel integration research</b>
+                  <b>Week 13 — Final project + wheel integration research</b>
                   <span class="phase">Final</span>
                 </div>
                 <p>
@@ -1036,6 +1062,25 @@ void loop() {
                   This was blocked because serial/COM access is restricted on the school Chromebook. As a workaround, the team found a website that outputs G27 wheel values for future forwarding to Arduino on an unrestricted device.
                 </p>
               </div>
+
+              <div class="tmedia two-videos">
+                <div class="video-embed">
+                  <iframe
+                    src="https://www.youtube.com/embed/aowM4yj2ABA"
+                    title="Wheel Direction Detection"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                </div>
+
+                <div class="video-embed">
+                  <iframe
+                    src="https://www.youtube.com/embed/R-wdsNkR_yI"
+                    title="G27 to Arduino Feasibility Discussion"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen></iframe>
+                </div>
+              </div>
+
               <div class="tmedia">
                 <div class="imgbox" data-img="assets/week13.jpg"></div>
               </div>
